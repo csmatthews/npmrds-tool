@@ -16,13 +16,15 @@ Sub ProcessExcel()
     Dim xWs As Worksheet
     Dim xPath As String
     On Error Resume Next
+Application.ScreenUpdating = False
 LInput:
     xTCount = 3
     Range("B1").Select
     ActiveCell.FormulaR1C1 ="=LEFT(RC[-1],FIND(""index"",RC[-1])+LEN(""index"")-1)"
     xPath = Application.ActiveWorkbook.Path
     Set xWs = ActiveWorkbook.Worksheets.Add(Sheets(1))
-    xWs.Name = Worksheets(2).Range("B1") & " " & Worksheets(2).Range("A2")
+    SheetName = Worksheets(2).Range("B1") & Worksheets(2).Range("A2")
+    xWs.Name = "Combined"
     Worksheets(2).Range("A3").EntireRow.Copy Destination:=xWs.Range("A1")
     For i = 2 To Worksheets.Count
         Worksheets(i).Range("A1").CurrentRegion.Offset(CInt(xTCount), 0).Copy _
@@ -73,7 +75,9 @@ Dim x As Integer
          xRow = xRow + 1
          xColumn = xColumn + 1
       Next
-Worksheets(1).SaveAs Filename:=xPath & "\\"& xWs.Name & ".xlsx"
+Application.ScreenUpdating = True
+MsgBox Worksheets(2).Range("B1") & Worksheets(2).Range("A2")
+Worksheets(1).SaveAs Filename:=xPath & "\\"& SheetName & ".xlsx"
 End Sub
 '''
 
