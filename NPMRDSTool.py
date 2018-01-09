@@ -10,13 +10,7 @@
 #-------------------------------------------------------------------------------
 
 # Import System libraries
-import os
-import sys
-import glob
-import random
-import re
-import win32com
-import arcpy, fnmatch
+import os, glob, win32com, arcpy, fnmatch
 from win32com.client import Dispatch
 
 scripts_dir = "O:\d-multiyear\d-CongestionManagement\d-tool"
