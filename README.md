@@ -4,17 +4,17 @@ This tool processes NPMRDS data downloaded from RITIS to use in ArcGIS Pro. It c
 
 ## Prerequisites
 
-* Downloaded XML files from the [NPMRDS Analytics Suite](https://npmrds.ritis.org/analytics/)
-* Add the latest version of the pywin32 package to [ArcGIS Pro Python Package Manager](https://pro.arcgis.com/en/pro-app/arcpy/get-started/what-is-conda.htm)
+* XML files downloaded from the [NPMRDS Analytics Suite](https://npmrds.ritis.org/analytics/)
+* Latest version of the pywin32 package added to [ArcGIS Pro Python Package Manager](https://pro.arcgis.com/en/pro-app/arcpy/get-started/what-is-conda.htm)
 
 ## Installing
 
-Download the NPMRDSTool.py file.
+Download [NPMRDSTool.py](NPMRDSTool.py)
 
 ## Running the Tool
 
-Change the file path of Line 60 to where your .XML files are located.
-Run the ProcessExcel.py file using the ArcGIS Pro IDLE
+1. Change the file path of Line 60 to where your .XML files are located.
+2. Run the ProcessExcel.py file using the ArcGIS Pro IDLE
 
 ## Author
 
