@@ -1,19 +1,21 @@
 #-------------------------------------------------------------------------------
-# Name:        NPMRDS Tool (Step 1)
+# Name:        NPMRDS Tool
 # Purpose:     Processes NPMRDS data from RITIS.
 #
 # Author:      Christian Matthews, Rockingham Planning Commission
 #              cmatthews@rpc-nh.org
 #
 # Created:     01/01/2018
-# Updated:     01/03/2018
+# Updated:     01/10/2018
 #-------------------------------------------------------------------------------
 
-# Import System libraries
+#Import System libraries
 import os, glob, win32com, arcpy, fnmatch
 from win32com.client import Dispatch
+print("Imported libraries")
 
-scripts_dir = "O:\d-multiyear\d-CongestionManagement\d-tool"
+
+#Create code for VBA
 strcode = \
 '''
 Sub ProcessExcel()
@@ -51,11 +53,15 @@ Worksheets(1).SaveAs Filename:=xPath & "\\"& SheetName & ".xlsx"
 End Sub
 '''
 
+#Setup Excel Parameters
 x1 = Dispatch("Excel.Application")
 x1.Visible = False
 x1.DisplayAlerts = False
+directory = "O:\d-multiyear\d-CongestionManagement\d-tool"
+print("Set Excel parameters")
 
-for script_file in glob.glob(os.path.join(scripts_dir, "*.xml")):
+#Apply VBA code
+for script_file in glob.glob(os.path.join(directory, "*.xml")):
     (file_path, file_name) = os.path.split(script_file)
     objworkbook = x1.Workbooks.Open(script_file)
     print("Processing {}".format(file_name))
@@ -64,19 +70,20 @@ for script_file in glob.glob(os.path.join(scripts_dir, "*.xml")):
     x1.Application.Run("ProcessExcel")
     x1.Workbooks.Close()
     x1.Application.Quit()
-    print("Processed file successfully!")
+    print("Processed {} successfully".format(file_name))
 x1.Quit()
+print("Finished processing .XML files")
 
+#Set ArcGIS Parameters
 arcpy.env.overwriteOutput = True
-arcpy.env.workspace = r"O:\d-multiyear\d-CongestionManagement\d-NPMRDSTool"
-os.chdir(r"O:\d-multiyear\d-CongestionManagement\d-NPMRDSTool")
-print("Imported System Modules")
+arcpy.env.workspace = directory
+os.chdir(directory)
+print("Set ArcGIS Parameters")
 
 #Import Tables
 tables = arcpy.ListFiles("*.xlsx")
-dbPath = r"O:\d-multiyear\d-CongestionManagement\d-NPMRDSTool"
 dbName = "NPMRDS"
-arcpy.CreateFileGDB_management(dbPath,dbName)
+arcpy.CreateFileGDB_management(directory,dbName)
 for table in tables:
     if " " in table:
         os.rename(table, table.replace(" ", ""))
@@ -94,7 +101,7 @@ for table in tables:
 print("Imported Tables")
 
 #Calculate Fields
-arcpy.env.workspace = r"O:\d-multiyear\d-CongestionManagement\d-NPMRDSTool\NPMRDS.gdb"
+arcpy.env.workspace = directory + "\\NPMRDS.gdb"
 tables = arcpy.ListTables()
 for table in tables:
     if fnmatch.fnmatch(table,'*travel*'):
@@ -116,5 +123,43 @@ for table in tables:
             tables = arcpy.ListTables()
             expression = ("(!F12_00_AM!+!F1_00_AM!+!F2_00_AM!+!F3_00_AM!+!F4_00_AM!+!F5_00_AM!+!F6_00_AM!+!F7_00_AM!+!F8_00_AM!+!F9_00_AM!+!F10_00_AM!+!F11_00_AM!+!F12_00_PM!+!F1_00_PM!+!F2_00_PM!+!F3_00_PM!+!F4_00_PM!+!F5_00_PM!+!F6_00_PM!+!F7_00_PM!+!F8_00_PM!+!F9_00_PM!+!F10_00_PM!+!F11_00_PM!)/24")
             arcpy.CalculateField_management(table,"TTI_Week_AVG", expression)
+    if fnmatch.fnmatch(table,'*buffer*'):
+        if 'weekday' in table:
+            arcpy.AddField_management(table,"BI_Peak_AM","DOUBLE")
+            tables = arcpy.ListTables()
+            arcpy.CalculateField_management(table,"BI_Peak_AM", "(!F6_00_AM!+!F7_00_AM!+!F8_00_AM!)/3", "PYTHON_9.3")
+            tables = arcpy.ListTables()
+            arcpy.AddField_management(table,"BI_Peak_PM","DOUBLE")
+            tables = arcpy.ListTables()
+            arcpy.CalculateField_management(table,"BI_Peak_PM", "(!F4_00_PM!+!F5_00_PM!+!F6_00_PM!)/3", "PYTHON_9.3")
+            tables = arcpy.ListTables()
+            arcpy.AddField_management(table,"BI_Peak_AVG","DOUBLE")
+            tables = arcpy.ListTables()
+            arcpy.CalculateField_management(table,"BI_Peak_AVG", "(!BI_Peak_AM!+!BI_Peak_PM!)/2", "PYTHON_9.3")
+            tables = arcpy.ListTables()
+        else:
+            arcpy.AddField_management(table,"BI_Week_AVG","DOUBLE")
+            tables = arcpy.ListTables()
+            expression = ("(!F12_00_AM!+!F1_00_AM!+!F2_00_AM!+!F3_00_AM!+!F4_00_AM!+!F5_00_AM!+!F6_00_AM!+!F7_00_AM!+!F8_00_AM!+!F9_00_AM!+!F10_00_AM!+!F11_00_AM!+!F12_00_PM!+!F1_00_PM!+!F2_00_PM!+!F3_00_PM!+!F4_00_PM!+!F5_00_PM!+!F6_00_PM!+!F7_00_PM!+!F8_00_PM!+!F9_00_PM!+!F10_00_PM!+!F11_00_PM!)/24")
+            arcpy.CalculateField_management(table,"BI_Week_AVG", expression)
+    if fnmatch.fnmatch(table,'*planning*'):
+        if 'weekday' in table:
+            arcpy.AddField_management(table,"PTI_Peak_AM","DOUBLE")
+            tables = arcpy.ListTables()
+            arcpy.CalculateField_management(table,"PTI_Peak_AM", "(!F6_00_AM!+!F7_00_AM!+!F8_00_AM!)/3", "PYTHON_9.3")
+            tables = arcpy.ListTables()
+            arcpy.AddField_management(table,"PTI_Peak_PM","DOUBLE")
+            tables = arcpy.ListTables()
+            arcpy.CalculateField_management(table,"PTI_Peak_PM", "(!F4_00_PM!+!F5_00_PM!+!F6_00_PM!)/3", "PYTHON_9.3")
+            tables = arcpy.ListTables()
+            arcpy.AddField_management(table,"PTI_Peak_AVG","DOUBLE")
+            tables = arcpy.ListTables()
+            arcpy.CalculateField_management(table,"PTI_Peak_AVG", "(!PTI_Peak_AM!+!PTI_Peak_PM!)/2", "PYTHON_9.3")
+            tables = arcpy.ListTables()
+        else:
+            arcpy.AddField_management(table,"PTI_Week_AVG","DOUBLE")
+            tables = arcpy.ListTables()
+            expression = ("(!F12_00_AM!+!F1_00_AM!+!F2_00_AM!+!F3_00_AM!+!F4_00_AM!+!F5_00_AM!+!F6_00_AM!+!F7_00_AM!+!F8_00_AM!+!F9_00_AM!+!F10_00_AM!+!F11_00_AM!+!F12_00_PM!+!F1_00_PM!+!F2_00_PM!+!F3_00_PM!+!F4_00_PM!+!F5_00_PM!+!F6_00_PM!+!F7_00_PM!+!F8_00_PM!+!F9_00_PM!+!F10_00_PM!+!F11_00_PM!)/24")
+            arcpy.CalculateField_management(table,"PTI_Week_AVG", expression)
 print("Calculated Fields")
 
