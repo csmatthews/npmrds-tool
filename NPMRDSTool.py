@@ -14,7 +14,6 @@ import os, glob, win32com, arcpy, fnmatch
 from win32com.client import Dispatch
 print("Imported libraries")
 
-
 #Create code for VBA
 strcode = \
 '''
@@ -81,23 +80,13 @@ os.chdir(directory)
 print("Set ArcGIS Parameters")
 
 #Import Tables
-tables = arcpy.ListFiles("*.xlsx")
-dbName = "NPMRDS"
-arcpy.CreateFileGDB_management(directory,dbName)
-for table in tables:
-    if " " in table:
-        os.rename(table, table.replace(" ", ""))
-tables = arcpy.ListFiles("*.xlsx")
-for table in tables:
-    if "(" in table:
-        os.rename(table, table.replace("(", ""))
-tables = arcpy.ListFiles("*.xlsx")
-for table in tables:
-    if ")" in table:
-        os.rename(table, table.replace(")", ""))
-tables = arcpy.ListFiles("*.xlsx")
-for table in tables:
-    arcpy.ExcelToTable_conversion(table, "NPMRDS.gdb\\" + os.path.splitext(os.path.basename(table))[0])
+excelFiles = arcpy.ListFiles("*.xlsx")
+arcpy.CreateFileGDB_management(directory,"NPMRDS.gdb")
+for excel in excelFiles:
+    os.rename(excel, excel.replace(" ", "").replace("(", "").replace(")", ""))
+excelFiles = arcpy.ListFiles("*.xlsx")
+for excel in excelFiles:
+    arcpy.ExcelToTable_conversion(excel, "NPMRDS.gdb\\" + os.path.splitext(os.path.basename(excel))[0])
 print("Imported Tables")
 
 #Calculate Fields
@@ -162,4 +151,3 @@ for table in tables:
             expression = ("(!F12_00_AM!+!F1_00_AM!+!F2_00_AM!+!F3_00_AM!+!F4_00_AM!+!F5_00_AM!+!F6_00_AM!+!F7_00_AM!+!F8_00_AM!+!F9_00_AM!+!F10_00_AM!+!F11_00_AM!+!F12_00_PM!+!F1_00_PM!+!F2_00_PM!+!F3_00_PM!+!F4_00_PM!+!F5_00_PM!+!F6_00_PM!+!F7_00_PM!+!F8_00_PM!+!F9_00_PM!+!F10_00_PM!+!F11_00_PM!)/24")
             arcpy.CalculateField_management(table,"PTI_Week_AVG", expression)
 print("Calculated Fields")
-
