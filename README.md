@@ -1,10 +1,10 @@
 # NPMRDS Tool
 
-This tool processes NPMRDS data downloaded from RITIS to use in ArcGIS Pro. It converts the downloaded .XML files to tables and imports that data into a geodatabase.
+This tool processes NPMRDS data downloaded from RITIS' NPMRDS Trend Map tool to use in ArcGIS Pro. It converts the downloaded .XML files to tables, imports that data into a geodatabase, and creates new fields.
 
 ## Prerequisites
 
-* XML files downloaded from the [NPMRDS Analytics Suite](https://npmrds.ritis.org/analytics/)
+* XML files downloaded from the [NPMRDS Trend Map Tool](https://npmrds.ritis.org/analytics/)
 * Latest version of the pywin32 package added to the [ArcGIS Pro Python Package Manager](https://pro.arcgis.com/en/pro-app/arcpy/get-started/what-is-conda.htm)
 
 ## Installing
