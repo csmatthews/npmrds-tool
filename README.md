@@ -4,8 +4,8 @@ This tool processes NPMRDS data downloaded from RITIS to use in ArcGIS Pro. It c
 
 ### Prerequisites
 
-Downloaded XML files from the [NPMRDS Analytics Suite](https://npmrds.ritis.org/analytics/)
-Add the latest version of the pywin32 package to [ArcGIS Pro Python Package Manager](https://pro.arcgis.com/en/pro-app/arcpy/get-started/what-is-conda.htm)
+* Downloaded XML files from the [NPMRDS Analytics Suite](https://npmrds.ritis.org/analytics/)
+* Add the latest version of the pywin32 package to [ArcGIS Pro Python Package Manager](https://pro.arcgis.com/en/pro-app/arcpy/get-started/what-is-conda.htm)
 
 ### Installing
 
@@ -26,5 +26,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-*README Template = **Billie Thompson** - [PurpleBooth](https://github.com/PurpleBooth)
-*Script = [**dilbert**](https://stackoverflow.com/users/2507539/dilbert) , [**ExtendOffice**](https://www.extendoffice.com/)
+* README Template = [PurpleBooth](https://github.com/PurpleBooth)
+* Script = [**dilbert**](https://stackoverflow.com/users/2507539/dilbert) , [**ExtendOffice**](https://www.extendoffice.com/)
