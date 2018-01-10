@@ -18,11 +18,11 @@ Download [NPMRDSTool.py](NPMRDSTool.py) and place the file in a desired location
 
 ## Author
 
-* [Christian Matthews](https://github.com/csmatthews)
+[Christian Matthews](https://github.com/csmatthews)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the [MIT License](LICENSE.md)
 
 ## Acknowledgments
 
