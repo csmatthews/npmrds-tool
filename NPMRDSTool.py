@@ -4,9 +4,6 @@
 #
 # Author:      Christian Matthews, Rockingham Planning Commission
 #              cmatthews@rpc-nh.org
-#
-# Created:     01/01/2018
-# Updated:     01/10/2018
 #-------------------------------------------------------------------------------
 
 #Import System libraries
