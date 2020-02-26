@@ -1,6 +1,6 @@
 # NPMRDS Tool
 
-This tool processes NPMRDS data downloaded from RITIS' NPMRDS Trend Map tool to use in ArcGIS Pro. It converts the downloaded .XML files to tables, imports that data into a geodatabase, and creates new fields.
+This tool processes NPMRDS data downloaded from RITIS' NPMRDS Trend Map tool to use in ArcGIS. It converts the downloaded .XML files to tables and imports that data into a geodatabase.
 
 ## Prerequisites
 
@@ -13,8 +13,8 @@ Download [NPMRDSTool.py](NPMRDSTool.py) and place the file in a desired location
 
 ## Running the Tool
 
-1. Change the file path of Line 60 to where your .XML files are located
-2. Run the ProcessExcel.py file using the ArcGIS Pro IDLE
+1. Change the file path of Line 18 to where your .XML files are located
+2. Rename the gdb on Line 19 to what you would like
 
 ## Author
 
