@@ -5,11 +5,12 @@ This tool processes NPMRDS data downloaded from RITIS' NPMRDS Trend Map tool to 
 ## Prerequisites
 
 * XML files downloaded from the [NPMRDS Trend Map Tool](https://npmrds.ritis.org/analytics/)
-* Latest version of the pywin32 package added to the [ArcGIS Pro Python Package Manager](https://pro.arcgis.com/en/pro-app/arcpy/get-started/what-is-conda.htm)
+* Latest version of the pywin32 package added to the [ArcGIS Pro Python Package Manager](https://pro.arcgis.com/en/pro-app/arcpy/get-started/what-is-conda.htm) or to your machine.
 
 ## Installing
 
-Download [ProcessNPMRDSTool.py](ProcessNPMRDSTool.py) for non-GIS import or [ProcessNPMRDSTool_Extended.py](ProcessNPMRDSTool_Extended.py) for GIS import and place the file in a desired location
+1. Non-ArcGIS - [ProcessNPMRDSTool.py](ProcessNPMRDSTool.py) - This script will only process the .XML files.
+2. For ArcGIS - [ProcessNPMRDSTool_Extended.py](ProcessNPMRDSTool_Extended.py) - This script will process the .XML files and import them.
 
 ## Running the Tool
 
