@@ -9,7 +9,7 @@ This tool processes NPMRDS data downloaded from RITIS' NPMRDS Trend Map tool to 
 
 ## Installing
 
-Download [NPMRDSTool.py](NPMRDSTool.py) and place the file in a desired location
+Download [ProcessNPMRDSTool.py](ProcessNPMRDSTool.py) for non-GIS import or [ProcessNPMRDSTool_Extended.py](ProcessNPMRDSTool_Extended.py) for GIS import and place the file in a desired location
 
 ## Running the Tool
 
