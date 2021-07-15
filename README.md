@@ -10,12 +10,12 @@ This tool processes NPMRDS data downloaded from RITIS' NPMRDS Trend Map tool to 
 ## Installing
 
 1. Non-ArcGIS - [ProcessNPMRDSTool.py](ProcessNPMRDSTool.py) - This script will only process the .XML files.
-2. For ArcGIS - [ProcessNPMRDSTool_Extended.py](ProcessNPMRDSTool_Extended.py) - This script will process the .XML files and import them.
+2. UNDER DEVELOPMENT - For ArcGIS - [ProcessNPMRDSTool_Extended.py](ProcessNPMRDSTool_Extended.py) - This script will process the .XML files and import them.
 
 ## Running the Tool
 
-1. Change the file path of Line 18 to where your .XML files are located
-2. Rename the gdb on Line 19 to what you would like
+1. Non-ArcGIS - [ProcessNPMRDSTool.py](ProcessNPMRDSTool.py) - This script will only process the .XML files.
+  *Change the file path of Line 17 to the folder where your .XML files are located
 
 ## Author
 
