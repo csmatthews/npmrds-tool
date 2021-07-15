@@ -10,7 +10,6 @@
 import os
 import glob
 import win32com
-import arcpy
 from win32com.client import Dispatch
 print("Imported libraries")
 
@@ -73,21 +72,3 @@ for script_file in glob.glob(os.path.join(directory, "*.xml")):
     print("Processed {} successfully".format(file_name))
 x1.Quit()
 print("Finished processing .XML files")
-
-# Set ArcGIS Parameters
-arcpy.env.overwriteOutput = True
-arcpy.env.workspace = directory
-os.chdir(directory)
-print("Set ArcGIS Parameters")
-
-# Import Tables
-excelFiles = arcpy.ListFiles("*.xlsx")
-arcpy.CreateFileGDB_management(directory, gdbName)
-for excel in excelFiles:
-    os.rename(excel, excel.replace(" ", "").replace("(", "").replace(")", ""))
-excelFiles = arcpy.ListFiles("*.xlsx")
-for excel in excelFiles:
-    arcpy.ExcelToTable_conversion(excel,
-                                  gdbName+"\\" +
-                                  os.path.splitext(os.path.basename(excel))[0])
-print("Imported Tables")
