@@ -14,9 +14,7 @@ from win32com.client import Dispatch
 print("Imported libraries")
 
 # Set User Paths
-directory = r"O:\d-multiyear\d-CongestionManagement\d-data\d-2019"
-gdbName = "NPMRDS.gdb"
-
+directory = r""
 
 # Create code for VBA
 strcode = \
